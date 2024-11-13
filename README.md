@@ -1,5 +1,9 @@
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
+## 🚧 Project Status: Under Development 🚧
+
+This project, **SHARE IT**, is currently a work in progress. New features are being added, and existing components are being refined. Expect frequent updates and improvements!
+
 ## Getting Started
 
 First, run the development server:
