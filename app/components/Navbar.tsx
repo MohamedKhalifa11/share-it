@@ -9,7 +9,13 @@ const Navbar = async () => {
     <header className="px-5 py-3 bg-white shadow-sm font-work-sans">
       <nav className="flex justify-between items-center">
         <Link href="/">
-          <Image src="/logo.webp" alt="logo" width={50} height={60} />
+          <Image
+            src="/logo.webp"
+            alt="logo"
+            width={50}
+            height={50}
+            className="transition-transform duration-300 hover:rotate-90"
+          />
         </Link>
         <div className="flex items-center gap-5 text-black">
           {session && session?.user ? (
