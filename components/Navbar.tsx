@@ -1,4 +1,4 @@
-import { auth, signOut } from "@/auth";
+import { auth, signOut } from "@/lib/auth";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -6,8 +6,8 @@ const Navbar = async () => {
   const session = await auth();
   // const session = false;
   return (
-    <header className="px-5 py-3 bg-white shadow-sm font-work-sans">
-      <nav className="flex justify-between items-center">
+    <header className="bg-white px-5 py-3 font-work-sans shadow-sm">
+      <nav className="flex items-center justify-between">
         <Link href="/">
           <Image
             src="/logo.webp"

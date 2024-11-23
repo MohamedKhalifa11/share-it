@@ -1,10 +1,3 @@
-// import NextAuth from "next-auth"
-// import GitHub from "next-auth/providers/github"
- 
-// export const { handlers, auth, signIn, signOut } = NextAuth({
-//   providers: [GitHub],
-// })
-
 import NextAuth from "next-auth";
 import GitHubProvider from "next-auth/providers/github";
 import GoogleProvider from "next-auth/providers/google";
