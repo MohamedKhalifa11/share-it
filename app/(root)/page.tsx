@@ -1,5 +1,7 @@
-import BlogCard from "@/components/BlogCard";
+import BlogCard, { BlogTypeCard } from "@/components/BlogCard";
 import SearchForm from "../../components/SearchForm";
+import { client } from "@/sanity/lib/client";
+import { BLOGS_Query } from "@/sanity/lib/queries";
 
 export default async function Home({
   searchParams,
@@ -10,19 +12,9 @@ export default async function Home({
   console.log(searchParams);
   console.log(query);
 
-  const posts = [
-    {
-      _CreatedAt: new Date(),
-      views: 56,
-      author: { _id: 1, name: "Mohamed" },
-      _id: 1,
-      describtion: "This is a describtion",
-      image:
-        "https://media.licdn.com/dms/image/v2/D4D12AQG56UPUtPJj0w/article-cover_image-shrink_423_752/article-cover_image-shrink_423_752/0/1669373321238?e=1736985600&v=beta&t=qNT_ausGBDlSY3SwyQSXoMJY2mjojY_2-R4yfkJiq0s",
-      category: "Tech",
-      title: "This is a title",
-    },
-  ];
+  const posts = await client.fetch(BLOGS_Query);
+  console.log(JSON.stringify(posts, null, 2));
+  console.log(posts);
 
   return (
     <>
@@ -41,7 +33,7 @@ export default async function Home({
         </p>
         <ul className="card_grid mt-7">
           {posts?.length > 0 ? (
-            posts.map((post: BlogCardType) => (
+            posts.map((post: BlogTypeCard) => (
               <BlogCard key={post?._id} post={post} />
             ))
           ) : (
