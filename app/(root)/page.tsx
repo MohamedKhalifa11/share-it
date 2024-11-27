@@ -1,6 +1,5 @@
 import BlogCard, { BlogTypeCard } from "@/components/BlogCard";
 import SearchForm from "../../components/SearchForm";
-// import { client } from "@/sanity/lib/client";
 import { BLOGS_QUERY } from "@/sanity/lib/queries";
 import { sanityFetch, SanityLive } from "@/sanity/lib/live";
 
@@ -10,10 +9,9 @@ export default async function Home({
   searchParams: Promise<{ query?: string }>;
 }) {
   const query = (await searchParams).query;
-  console.log(searchParams);
-  console.log(query);
+  const params = { search: query || null };
 
-  const { data: posts } = await sanityFetch({ query: BLOGS_QUERY });
+  const { data: posts } = await sanityFetch({ query: BLOGS_QUERY, params });
   return (
     <>
       <section className="blue_container">
