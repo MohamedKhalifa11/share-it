@@ -5,24 +5,28 @@ import Link from "next/link";
 import { Button } from "./ui/button";
 import { Author, Blog } from "@/sanity/types";
 
-export type BlogTypeCard = Omit<Blog, "author"> & {author?: Author}
+export type BlogTypeCard = Omit<Blog, "author"> & { author?: Author };
 
 const BlogCard = ({ post }: { post: BlogTypeCard }) => {
   const {
-    _CreatedAt,
+    _createdAt,
     views,
     author,
     title,
     category,
     _id,
     image,
-    describtion,
+    description,
   } = post;
+
+  console.log("Post data:", post._createdAt);
+  console.log("Raw _CreatedAt value:", _createdAt);
+  console.log(formatDate(_createdAt));
 
   return (
     <li className="blog-card group">
       <div className="flex-between">
-        <p className="blog_card_date">{formatDate(_CreatedAt)}</p>
+        <p className="blog_card_date">{formatDate(_createdAt)}</p>
         <div className="flex gap-1.5">
           <EyeIcon className="size-6 text-primary" />
           <span className="text-16-medium">{views}</span>
@@ -50,7 +54,7 @@ const BlogCard = ({ post }: { post: BlogTypeCard }) => {
       </div>
 
       <Link href={`/blog/${_id}`}>
-        <p className="blog-card_desc">{describtion}</p>
+        <p className="blog-card_desc">{description}</p>
         <img src={image} alt="blog image" className="blog-card_img" />
       </Link>
 

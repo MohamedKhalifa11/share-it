@@ -1,7 +1,8 @@
 import BlogCard, { BlogTypeCard } from "@/components/BlogCard";
 import SearchForm from "../../components/SearchForm";
-import { client } from "@/sanity/lib/client";
-import { BLOGS_Query } from "@/sanity/lib/queries";
+// import { client } from "@/sanity/lib/client";
+import { BLOGS_QUERY } from "@/sanity/lib/queries";
+import { sanityFetch, SanityLive } from "@/sanity/lib/live";
 
 export default async function Home({
   searchParams,
@@ -12,10 +13,7 @@ export default async function Home({
   console.log(searchParams);
   console.log(query);
 
-  const posts = await client.fetch(BLOGS_Query);
-  console.log(JSON.stringify(posts, null, 2));
-  console.log(posts);
-
+  const { data: posts } = await sanityFetch({ query: BLOGS_QUERY });
   return (
     <>
       <section className="blue_container">
@@ -41,6 +39,7 @@ export default async function Home({
           )}
         </ul>
       </section>
+      <SanityLive />
     </>
   );
 }
