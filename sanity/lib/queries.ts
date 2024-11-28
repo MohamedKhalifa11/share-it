@@ -28,3 +28,7 @@ export const BLOGS_BY_ID_QUERY = defineQuery(
   pitch
 }`
 )
+
+export const BLOG_VIEWS_QUERY = defineQuery(
+  `*[_type == "blog" && _id == $id][0]{ _id, views }`
+);
