@@ -1,7 +1,7 @@
 import { signIn } from "@/lib/auth";
 import React from "react";
 
-const Page = () => {
+const page = () => {
   return (
     <>
       <form
@@ -24,4 +24,4 @@ const Page = () => {
   );
 };
 
-export default Page;
+export default page;
