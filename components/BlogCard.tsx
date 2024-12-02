@@ -19,9 +19,9 @@ const BlogCard = ({ post }: { post: BlogTypeCard }) => {
     description,
   } = post;
 
-  console.log("Post data:", post._createdAt);
-  console.log("Raw _CreatedAt value:", _createdAt);
-  console.log(formatDate(_createdAt));
+  // console.log("Post data:", post._createdAt);
+  // console.log("Raw _CreatedAt value:", _createdAt);
+  // console.log(formatDate(_createdAt));
 
   return (
     <li className="blog-card group">
