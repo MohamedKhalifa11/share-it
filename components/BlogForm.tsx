@@ -1,15 +1,83 @@
 "use client";
-import { useState } from "react";
+import { useActionState, useState } from "react";
 import { Input } from "./ui/input";
 import { Textarea } from "./ui/textarea";
-import Image from "next/image";
 // import Image from "next/image";
 // import { writeClient } from "@/sanity/lib/write-client";
 // import Link from "next/link";
+import MDEditor from "@uiw/react-md-editor";
+import { Button } from "./ui/button";
+import { SendIcon } from "lucide-react";
+import { formSchema } from "@/lib/validation";
+import { z } from "zod";
+import { useToast } from "@/hooks/use-toast";
+import { useRouter } from "next/navigation";
 
 const BlogForm = () => {
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [imageUrl, setImageUrl] = useState<string | null>(null); // State to store the URL of the uploaded image
+  const [pitch, setPitch] = useState("");
+  const { toast } = useToast();
+  const router = useRouter();
+
+  const handleFormSubmit = async (prevState: any, formData: FormData) => {
+    try {
+      const formValues = {
+        title: formData.get("title") as string,
+        description: formData.get("description") as string,
+        category: formData.get("category") as string,
+        image_link: formData.get("image_link") as string,
+        pitch,
+      };
+
+      await formSchema.parseAsync(formValues);
+      console.log(formValues);
+
+      // const result = await createIdea(prevState, formData, pitch);
+      // console.log(result);
+
+      // if (result.status == "SUCCESS") {
+      //   toast({
+      //     title: "Success",
+      //     description: "Your startup pitch has been created successfully",
+      //   });
+
+      //   router.push(`/blog/${result._id}`);
+      // }
+
+      // console.log(result);
+      // return result;
+    } catch (error) {
+      if (error instanceof z.ZodError) {
+        const fieldErrors = error.flatten().fieldErrors;
+        setErrors(fieldErrors as unknown as Record<string, string>);
+        toast({
+          title: "Error",
+          description: "Please check your inputs and try again",
+          variant: "destructive",
+        });
+
+        return { ...prevState, error: "Validation Failed", status: "ERROR" };
+      }
+
+      toast({
+        title: "Error",
+        description: "An unexpected error has occurred",
+        variant: "destructive",
+      });
+
+      return {
+        ...prevState,
+        error: "An unexpected error has occurred",
+        status: "ERROR",
+      };
+    }
+  };
+
+  const [state, formAction, isPending] = useActionState(handleFormSubmit, {
+    error: "",
+    status: "INITIAL",
+  });
   // const [imagePreview, setImagePreview] = useState<string | null>(null);
 
   // // Function to upload image to Sanity
@@ -55,7 +123,7 @@ const BlogForm = () => {
   };
 
   return (
-    <form action={() => {}} className="blog-form">
+    <form action={formAction} className="blog-form">
       <div>
         <label htmlFor="title" className="blog-form_label">
           Title
@@ -121,12 +189,10 @@ const BlogForm = () => {
         {imageUrl && (
           <div className="mt-4">
             <p>Preview of the cover image:</p>
-            <Image
+            <img
               src={imageUrl}
               alt="Image Preview"
-              width={100}
-              height={80}
-              className="rounded"
+              className="max-w-72 rounded"
             />
           </div>
         )}
@@ -134,6 +200,24 @@ const BlogForm = () => {
         {errors.image_link && (
           <p className="blog-form_error">{errors.image_link}</p>
         )}
+      </div>
+
+      <div data-color-mode="light">
+        <label htmlFor="pitch" className="blog-form_label">
+          Pitch
+        </label>
+        <MDEditor
+          value={pitch}
+          onChange={(value) => setPitch(value as string)}
+          id="pitch"
+          preview="edit"
+          height={300}
+          style={{ borderRadius: 20, overflow: "hidden" }}
+          textareaProps={{ placeholder: "Write your blog here" }}
+          previewOptions={{ disallowedElements: ["style"] }}
+        />
+
+        {errors.pitch && <p className="blog-form_error">{errors.pitch}</p>}
       </div>
 
       {/* <div>
@@ -167,6 +251,14 @@ const BlogForm = () => {
           <p className="blog-form_error">{errors.image_upload}</p>
         )}
       </div> */}
+      <Button
+        type="submit"
+        className="blog-form_btn text-white"
+        disabled={isPending}
+      >
+        {isPending ? "Submitting..." : "Submit your Blog"}
+        <SendIcon className="ml-2 size-6" />
+      </Button>
     </form>
   );
 };
