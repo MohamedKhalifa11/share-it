@@ -1,9 +1,10 @@
-import { formatDate } from "@/lib/utils";
+import { cn, formatDate } from "@/lib/utils";
 import { EyeIcon } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { Button } from "./ui/button";
 import { Author, Blog } from "@/sanity/types";
+import { Skeleton } from "./ui/skeleton";
 
 export type BlogTypeCard = Omit<Blog, "author"> & { author?: Author };
 
@@ -44,8 +45,8 @@ const BlogCard = ({ post }: { post: BlogTypeCard }) => {
         </div>
         <Link href={`/user/${author?._id}`}>
           <Image
-            src="https://placehold.co/48x48"
-            alt="placeholder"
+            src={author?.image || "/user-48x48.png"}
+            alt={author?.name || ""}
             width={48}
             height={48}
             className="rounded-full"
@@ -69,5 +70,15 @@ const BlogCard = ({ post }: { post: BlogTypeCard }) => {
     </li>
   );
 };
+
+export const BlogCardSkeleton = () => (
+  <>
+    {[0, 1, 2, 3, 4].map((index: number) => (
+      <li key={cn("skeleton", index)}>
+        <Skeleton className="blog-card_skeleton" />
+      </li>
+    ))}
+  </>
+);
 
 export default BlogCard;
