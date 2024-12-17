@@ -1,5 +1,5 @@
 import { client } from "@/sanity/lib/client";
-import { AUTHOR_BY_GITHUB_ID_QUERY } from "@/sanity/lib/queries";
+import { AUTHOR_BY_GOOGLE_OR_GITHUB_ID_QUERY } from "@/sanity/lib/queries";
 import { writeClient } from "@/sanity/lib/write-client";
 import NextAuth from "next-auth";
 import GitHubProvider from "next-auth/providers/github";
@@ -18,18 +18,17 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
   ],
 
   callbacks: {
-    async signIn({ 
-      user: { name, email, image }, 
-      account, 
-      profile,
-    }) {
+    async signIn({ user: { name, email, image }, account, profile }) {
       // const id = account?.provider === "github" ? profile?.id : account?.providerAccountId;
-      const id = account?.provider === "github" ? profile?.id : googleId(profile?.sub);
-      const login = account?.provider === "github" ? profile?.login : email?.split("@")[0];
+      const id =
+        account?.provider === "github" ? profile?.id : googleId(profile?.sub);
+      const login =
+        account?.provider === "github" ? profile?.login : email?.split("@")[0];
       const bio = account?.provider === "github" ? profile?.bio : "";
-      
-      const existingUser = await client.withConfig({useCdn: false})
-      .fetch(AUTHOR_BY_GITHUB_ID_QUERY, { id });
+
+      const existingUser = await client
+        .withConfig({ useCdn: false })
+        .fetch(AUTHOR_BY_GOOGLE_OR_GITHUB_ID_QUERY, { id });
 
       if (!existingUser) {
         await writeClient.create({
@@ -49,9 +48,11 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
     async jwt({ token, account, profile }) {
       if (account && profile) {
         // const id = account.providerAccountId;
-        const id = account?.provider === "github" ? profile?.id : googleId(profile?.sub);
-        const user = await client.withConfig({useCdn: false})
-        .fetch(AUTHOR_BY_GITHUB_ID_QUERY, { id });
+        const id =
+          account?.provider === "github" ? profile?.id : googleId(profile?.sub);
+        const user = await client
+          .withConfig({ useCdn: false })
+          .fetch(AUTHOR_BY_GOOGLE_OR_GITHUB_ID_QUERY, { id });
         token.id = user?._id;
       }
       console.log(token);
