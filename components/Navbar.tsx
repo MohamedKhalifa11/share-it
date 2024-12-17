@@ -1,5 +1,5 @@
 import { auth, signOut } from "@/lib/auth";
-import { BadgePlus, LogOut } from "lucide-react";
+import { BadgePlus, LogOut, User } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
@@ -49,12 +49,13 @@ const Navbar = async () => {
                     alt={session?.user?.name}
                   />
                   <AvatarFallback>
-                    <Image
+                    {/* <Image
                       src="/user-48x48.png"
                       alt="user image"
                       width={40}
                       height={40}
-                    />
+                    /> */}
+                    <User />
                   </AvatarFallback>
                 </Avatar>
               </Link>
