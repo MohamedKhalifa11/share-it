@@ -10,14 +10,17 @@ const Navbar = async () => {
   return (
     <header className="bg-white px-5 py-3 font-work-sans shadow-sm">
       <nav className="flex items-center justify-between">
-        <Link href="/">
+        <Link href="/" className="flex items-center gap-2">
           <Image
-            src="/logo.webp"
+            src="/logo.png"
             alt="logo"
             width={50}
             height={50}
-            className="transition-transform duration-300 hover:rotate-90"
+            className="transition-transform duration-300 ease-in-out hover:rotate-90"
           />
+          <span className="text-3xl font-semibold uppercase text-blue-500">
+            Share It
+          </span>
         </Link>
         <div className="flex items-center gap-5 text-black">
           {session && session?.user ? (
