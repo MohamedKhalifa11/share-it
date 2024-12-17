@@ -79,6 +79,11 @@
     @apply text-sm font-normal text-black-100;
   }
 
+  /* Login */
+  .login_btn {
+    @apply mb-4 flex w-full items-center justify-center gap-2 p-5 text-[1rem] text-white
+  }
+
   /* profile */
   .profile_container {
     @apply mx-auto flex w-full max-w-7xl flex-col gap-10 px-6 pb-10 pt-20 lg:flex-row;
@@ -199,13 +204,11 @@
   }
 
   .pattern {
-    background-image: linear-gradient(
-      to right,
-      transparent 49.5%,
-      rgba(251, 232, 67, 0.2) 49.5%,
-      rgba(251, 232, 67, 0.6) 50.5%,
-      transparent 50.5%
-    );
+    background-image: linear-gradient(to right,
+        transparent 49.5%,
+        rgba(251, 232, 67, 0.2) 49.5%,
+        rgba(251, 232, 67, 0.6) 50.5%,
+        transparent 50.5%);
     background-size: 5% 100%;
     background-position: center;
     background-repeat: repeat-x;
