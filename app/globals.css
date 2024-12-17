@@ -192,7 +192,7 @@
 
   /* view */
   .view-container {
-    @apply fixed bottom-3 right-3 mt-5 flex items-center justify-end;
+    @apply fixed bottom-3 left-3 mt-5 flex items-center justify-end;
   }
 
   .view-text {
