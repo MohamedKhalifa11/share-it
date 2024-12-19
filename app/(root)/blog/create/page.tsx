@@ -2,6 +2,10 @@ import BlogForm from "@/components/BlogForm";
 import { auth } from "@/lib/auth";
 import { redirect } from "next/navigation";
 
+export const metadata = {
+  title: "Create New Blog",
+};
+
 const page = async () => {
   const session = await auth();
   if (!session) redirect("/login");

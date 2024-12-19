@@ -10,15 +10,15 @@ const Navbar = async () => {
   return (
     <header className="bg-white px-5 py-3 font-work-sans shadow-sm">
       <nav className="flex items-center justify-between">
-        <Link href="/" className="flex items-center gap-2">
+        <Link href="/" className="group flex items-center gap-2">
           <Image
             src="/logo.png"
             alt="logo"
             width={50}
             height={50}
-            className="transition-transform duration-300 ease-in-out hover:rotate-90"
+            className="transition-transform duration-300 ease-in-out group-hover:rotate-90"
           />
-          <span className="text-3xl font-semibold uppercase text-blue-500">
+          <span className="text-3xl font-semibold uppercase text-blue-500 group-hover:text-blue-700">
             Share It
           </span>
         </Link>

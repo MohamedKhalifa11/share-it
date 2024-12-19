@@ -1,3 +1,5 @@
+import { client } from "@/sanity/lib/client";
+import { AUTHOR_BY_ID_QUERY, BLOGS_BY_ID_QUERY } from "@/sanity/lib/queries";
 import { clsx, type ClassValue } from "clsx";
 import { twMerge } from "tailwind-merge";
 
@@ -15,4 +17,12 @@ export function formatDate(date: string) {
 
 export function parseServerActionResponse<T>(response: T) {
   return JSON.parse(JSON.stringify(response));
+}
+
+export async function getUserById(id: string) {
+  return client.fetch(AUTHOR_BY_ID_QUERY, { id });
+}
+
+export async function getBlogById(id: string) {
+  return client.fetch(BLOGS_BY_ID_QUERY, { id });
 }

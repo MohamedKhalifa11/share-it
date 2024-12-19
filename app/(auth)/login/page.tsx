@@ -3,6 +3,10 @@ import { Github, Mail } from "lucide-react";
 import { signIn } from "@/lib/auth";
 import BackButton from "@/components/BackButton";
 
+export const metadata = {
+  title: "Sign in",
+};
+
 const Page = () => {
   return (
     <div className="flex min-h-screen flex-col items-center justify-center bg-gray-100 p-4">

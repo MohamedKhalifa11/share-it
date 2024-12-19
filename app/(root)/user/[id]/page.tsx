@@ -1,17 +1,32 @@
 import { BlogCardSkeleton } from "@/components/BlogCard";
 import UserBlogs from "@/components/UserBlogs";
 import { auth } from "@/lib/auth";
-import { client } from "@/sanity/lib/client";
-import { AUTHOR_BY_ID_QUERY } from "@/sanity/lib/queries";
+import { ParamsType } from "@/lib/types";
+import { getUserById } from "@/lib/utils";
 import Image from "next/image";
 import { notFound } from "next/navigation";
 import { Suspense } from "react";
+
+export async function generateMetadata({ params }: ParamsType) {
+  const id = (await params).id;
+  const user = await getUserById(id);
+
+  if (!user) {
+    return {
+      title: "User Not Found",
+    };
+  }
+
+  return {
+    title: `${user.name}`,
+  };
+}
 
 const page = async ({ params }: { params: Promise<{ id: string }> }) => {
   const id = (await params).id;
   const session = await auth;
 
-  const user = await client.fetch(AUTHOR_BY_ID_QUERY, { id });
+  const user = await getUserById(id);
   if (!user) return notFound();
   return (
     <>
