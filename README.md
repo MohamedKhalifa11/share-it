@@ -6,7 +6,7 @@ This project, **SHARE IT**, is currently a work in progress. New features are be
 
 ## Features
 
-- **Blog Creation with Real-Time Preview**: Users can create engaging blog posts by adding a title, description, category, pitch, and an image URL. The real-time image preview enhances the content creation experience, allowing users to see how their blog will appear instantly.
+- **Dynamic Blog Viewing**: Users can view comprehensive blog posts, complete with real-time view counts, providing insights into content popularity.
 
 - **Seamless User Authentication**: Integrated with **Sanity** and **NextAuth**, the app offers secure and user-friendly authentication via Gmail and GitHub, ensuring data security and ease of access.
 
@@ -18,8 +18,7 @@ This project, **SHARE IT**, is currently a work in progress. New features are be
 
 - **Advanced Search Functionality**: Empower users to effortlessly search for blogs and posts with a robust search mechanism, enhancing user experience and engagement.
 
-
-- **Dynamic Blog Viewing**: Users can view comprehensive blog posts, complete with real-time view counts, providing insights into content popularity.
+- **Blog Creation with Real-Time Preview**: Users can create engaging blog posts by adding a title, description, category, pitch, and an image URL. The real-time image preview enhances the content creation experience, allowing users to see how their blog will appear instantly.
 
 - **Secure User Logout**: Users can log out at any time, ensuring their data remains secure and their session ends when desired.
 
