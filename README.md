@@ -4,6 +4,37 @@ This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-
 
 This project, **SHARE IT**, is currently a work in progress. New features are being added, and existing components are being refined. Expect frequent updates and improvements!
 
+## Features
+
+- **Blog Creation with Real-Time Preview**: Users can create engaging blog posts by adding a title, description, category, pitch, and an image URL. The real-time image preview enhances the content creation experience, allowing users to see how their blog will appear instantly.
+
+- **Seamless User Authentication**: Integrated with **Sanity** and **NextAuth**, the app offers secure and user-friendly authentication via Gmail and GitHub, ensuring data security and ease of access.
+
+- **Performance Optimization**: This project leverages **Suspense** from React to manage the user experience during asynchronous operations. By handling loading states gracefully, it ensures that resources are presented smoothly, enhancing the overall user experience, even on slower networks.
+
+- **Bug Reporting System**: Equipped with a dedicated bug reporting feature, users can submit bugs by uploading screenshots, along with their name and email. This ensures prompt issue resolution and continuous improvement.
+
+- **Automated Error Reporting**: Built-in error tracking captures and sends detailed error reports to the developer, ensuring a stable and reliable user experience.
+
+- **Advanced Search Functionality**: Empower users to effortlessly search for blogs and posts with a robust search mechanism, enhancing user experience and engagement.
+
+
+- **Dynamic Blog Viewing**: Users can view comprehensive blog posts, complete with real-time view counts, providing insights into content popularity.
+
+- **Secure User Logout**: Users can log out at any time, ensuring their data remains secure and their session ends when desired.
+
+## Tech Stack
+
+- **Frontend**: Next.js, React, Tailwind CSS, Styled-components
+- **Backend**: Sanity
+- **Authentication**: NextAuth.js and Sanity
+- **Database**: Sanity CMS
+- **UI Components**: Radix UI, Lucide React
+- **Error Tracking**: Sentry
+- **Markdown Support**: Markdown-it, UIW React MD Editor
+- **Utilities**: clsx, Slugify
+- **Build Tools**: TypeScript, ESLint, Prettier
+
 ## Getting Started
 
 First, run the development server:
